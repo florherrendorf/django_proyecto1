@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from django.template import Template, Context, loader
 from django.shortcuts import render
 
+from inicio.models import Auto
+import random
+
 
 def bienvenida(request):
     respuesta = '<h1>Bienvenida!!!</h1>'
@@ -50,7 +53,7 @@ def mi_template2(request):
 
 
 def mi_template3(request):
-              
+
     return render(request, 'mi_template3.html', {"nombre": "Pepe"}) 
 
 
@@ -63,3 +66,10 @@ def condicionales_y_bucles(request):
     }
     
     return render(request, 'condicionales_y_bucles.html', diccionario)
+
+
+def crear_auto(request):
+    auto = Auto(marca=random.choice(['Ford', 'Fiat', 'Chevrolet', 'Toyota']), modelo='Generico', anio=random.choice([2020, 2021, 2022, 2023, 2024]))
+    auto.save()
+    diccionario = {}
+    return render(request, 'crear_auto.html', diccionario)

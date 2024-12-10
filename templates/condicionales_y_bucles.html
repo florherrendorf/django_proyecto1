@@ -19,7 +19,23 @@
         <p>
             {{numeros}}
         </p>
-          
+        {% if numeros|length > 5 %}
+        <ul>   
+            <li>  
+                {{numeros}}   #ol para que aparezca ordenado
+            </li>       
+        </ul>
+        {% endif %}
+
+        {% if numeros %}
+        <ul>
+            {% for n in numeros %}
+                <li>  
+                    {{n}}   bucle for
+                </li>             
+            {% endfor %}       
+        </ul>
+        {% endif %}
         
     </body>
 </html>

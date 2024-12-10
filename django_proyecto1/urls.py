@@ -16,19 +16,12 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from .views import bienvenida, fecha_y_hora, saludo, mi_template, mi_template2, mi_template3, condicionales_y_bucles
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('bienvenida/', bienvenida),
-    path('fecha-y-hora/', fecha_y_hora),
-    path('saludo/<str:nombre>/<str:apellido>/', saludo),
-    path('mi-template/', mi_template),
-    path('mi-template2/', mi_template2),
-    path('mi-template3/', mi_template3),
-    path('condicionales-y-bucles', condicionales_y_bucles)
+    path('', include("inicio.urls"))
     
 ]
