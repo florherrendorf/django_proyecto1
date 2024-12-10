@@ -9,8 +9,8 @@ import random
 
 
 def bienvenida(request):
-    respuesta = '<h1>Bienvenida!!!</h1>'
-    return HttpResponse(respuesta) 
+    contexto = {}
+    return render(request, 'inicio/bienvenida.html', contexto)
 
 def fecha_y_hora(request):
     fecha_hora = datetime.now()  
@@ -25,7 +25,7 @@ def saludo(request, nombre, apellido):
 
 def mi_template(request):
         
-    archivo_abierto = open('mi_template.html')
+    archivo_abierto = open('inicio/mi_template.html')
     template = Template(archivo_abierto.read())
     archivo_abierto.close()
     
@@ -42,7 +42,7 @@ def mi_template(request):
 
 def mi_template2(request):
           
-    template = loader.get_template('mi_template2.html')
+    template = loader.get_template('inicio/mi_template2.html')
     
     diccionario = {"nombre": "Pepe"}   # es la info que queremos pasarle al template
     template_renderizado = template.render(diccionario)    # ES PARA QUE ENTIENDA EL HTML
@@ -54,7 +54,7 @@ def mi_template2(request):
 
 def mi_template3(request):
 
-    return render(request, 'mi_template3.html', {"nombre": "Pepe"}) 
+    return render(request, 'inicio/mi_template3.html', {"nombre": "Pepe"}) 
 
 
 def condicionales_y_bucles(request):
@@ -65,11 +65,12 @@ def condicionales_y_bucles(request):
         "numeros": list(range(15))
     }
     
-    return render(request, 'condicionales_y_bucles.html', diccionario)
+    return render(request, 'inicio/condicionales_y_bucles.html', diccionario)
 
 
-def crear_auto(request):
-    auto = Auto(marca=random.choice(['Ford', 'Fiat', 'Chevrolet', 'Toyota']), modelo='Generico', anio=random.choice([2020, 2021, 2022, 2023, 2024]))
+def crear_auto(request, marca, modelo, anio):
+    auto = Auto(marca=marca, modelo=modelo, anio=anio)
     auto.save()
-    diccionario = {}
-    return render(request, 'crear_auto.html', diccionario)
+    
+    contexto = {'auto': auto }
+    return render(request, 'inicio/crear_auto.html', contexto)
