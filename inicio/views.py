@@ -8,6 +8,10 @@ from inicio.models import Auto
 import random
 
 
+def inicio(request):
+    contexto = {}
+    return render(request, 'inicio/home.html', contexto)
+
 def bienvenida(request):
     contexto = {}
     return render(request, 'inicio/bienvenida.html', contexto)
